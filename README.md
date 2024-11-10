@@ -6,15 +6,15 @@ This repository contains information about the Deep Learning [specialization](ht
 
 ## Courses
 
-[1. Neural Networks and Deep Learning](./course1-neural-networks-deep-learning/)
+[1. Neural Networks and Deep Learning](./course_1-neural-networks-deep-learning/)
 
-[2. Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization](./course2-improving-deep-neural-networks/)
+[2. Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization](./course_2-improving-deep-neural-networks/)
 
-[3. Structuring Machine Learning Projects](./course3-structuring-machine-learning-projects/)
+[3. Structuring Machine Learning Projects](./course_3-structuring-machine-learning-projects/)
 
-[4. Convolutional Neural Networks](./course4-convolutional-neural-networks/)
+[4. Convolutional Neural Networks](./course_4-convolutional-neural-networks/)
 
-[5. Sequence Models](./course5-sequence-models/)
+[5. Sequence Models](./course_5-sequence-models/)
 
 ## About the specialization
 
