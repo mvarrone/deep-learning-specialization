@@ -1,1 +1,0 @@
-## Lecture Notes W1
