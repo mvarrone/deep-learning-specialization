@@ -142,7 +142,7 @@ where $z$ is a real number
 
 So, notice a couple of things. 
 
-- If $z$ is very large, then $e^{-z}$ will be close to zero. So, then s$\sigma(z)$will be approximately one over one plus something very close to zero, because e to the negative of a very large number will be close to zero. So, this is close to 1. 
+- If $z$ is very large, then $e^{-z}$ will be close to zero. So, then $\sigma(z)$ will be approximately one over one plus something very close to zero, because e to the negative of a very large number will be close to zero. So, this is close to 1. 
 And indeed, if you look in the plot on the left, if $z$ is very large, then the $\sigma(z)$ is very close to 1. 
 
 If $z$ is very large, then:
