@@ -18,7 +18,7 @@ This repository contains information about the Deep Learning [specialization](ht
 
 ## About the specialization
 
-The Deep Learning Specialization is a foundational program that will help you understand the capabilities, challenges, and consequences of deep learning and prepare you to participate in the development of leading-edge AI technology. 
+The Deep Learning Specialization is a foundational program that will help you understand the capabilities, challenges, and consequences of deep learning and prepare you to participate in the development of leading-edge AI technology.
 
 In this Specialization, you will build and train neural network architectures such as Convolutional Neural Networks, Recurrent Neural Networks, LSTMs, Transformers, and learn how to make them better with strategies such as Dropout, BatchNorm, Xavier/He initialization, and more. Get ready to master theoretical concepts and their industry applications using Python and TensorFlow and tackle real-world cases such as speech recognition, music synthesis, chatbots, machine translation, natural language processing, and more.
 
@@ -50,6 +50,6 @@ By the end you’ll be able to:
 
 ## Professors
 
-- [Andrew Ng: Instructor, Founder, DeepLearning.AI & Co-founder, Coursera](https://www.coursera.org/instructor/andrewng)
+- [Andrew Ng: Instructor, Founder, DeepLearning.AI &amp; Co-founder, Coursera](https://www.coursera.org/instructor/andrewng)
 - [Kian Katanforoosh: Senior Curriculum Developer, DeepLearning.AI](https://www.coursera.org/instructor/kian-katanforoosh)
 - [Younes Bensouda Mourri: Curriculum developer, DeepLearning.AI](https://www.coursera.org/instructor/younes)
