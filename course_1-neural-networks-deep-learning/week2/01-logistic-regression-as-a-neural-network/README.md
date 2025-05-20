@@ -192,15 +192,20 @@ When we program neural networks, we usually keep the parameter $w$ and parameter
 
 In some other courses, you might have seen a different notation that handles this differently. In these conventions, you define an extra feature called $x_0 = 1$, so that:
 
-$$x \in \mathbb{R}^{n_x + 1}$$
+$$
+x \in \mathbb{R}^{n_x + 1}
+$$
 
 And then you define:
 
-$$\hat{y} = \sigma(\theta^T x)$$
+$$
+\hat{y} = \sigma(\theta^T x)
+$$
 
 In this alternative notation, you have vector parameters $\theta$: $\theta_0$, $\theta_1$, $\theta_2$, down to $\theta_{n_x}$
 
 Where:
+
 - $\theta_0$ plays the role of $b$ (a real number)
 - $\theta_1$ through $\theta_{n_x}$ play the role of $w$
 
@@ -210,7 +215,7 @@ If you haven't seen this notation before in other courses, don't worry about it.
 
 ### Summary
 
-So, you have now seen what the Logistic Regression model looks like. 
+So, you have now seen what the Logistic Regression model looks like.
 
 Next, to change the parameters $w$ and $b$ you need to define a cost function. Let's do that in the next video.
 
@@ -225,20 +230,20 @@ What are the parameters of Logistic Regression?
 
 ## Logistic Regression Cost Function
 
-In the previous video, you saw the Logistic Regression model. 
+In the previous video, you saw the Logistic Regression model.
 
 To train the parameters $w$ and $b$ of a Logistic Regression model, you need to define a cost function. Let's take a look at the cost function you can use to train Logistic Regression.
 
-
 ![alt text](./img/image5.png)
 
-To recap this is what we have defined from the previous slide. 
+To recap this is what we have defined from the previous slide.
 
-So, you output $\hat{y}^{(i)} = \sigma(w^Tx^{(i)} + b)$ where $\sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}$ is as defined here. 
+So, you output $\hat{y}^{(i)} = \sigma(w^Tx^{(i)} + b)$ where $\sigma(z^{(i)}) = \frac{1}{1 + e^{-z^{(i)}}}$ is as defined here.
 
-So, to learn parameters for your model, you're given a training set of $m$ training examples and it seems natural that you want to find parameters $w$ and $b$ so that at least on the training set, the outputs you have/the predictions you have on the training set, which I will write as $\hat{y}^{(i)}$ that will be close to the ground truth labels $y^{(i)}$ that you got in the training set. 
+So, to learn parameters for your model, you're given a training set of $m$ training examples and it seems natural that you want to find parameters $w$ and $b$ so that at least on the training set, the outputs you have/the predictions you have on the training set, which I will write as $\hat{y}^{(i)}$ that will be close to the ground truth labels $y^{(i)}$ that you got in the training set.
 
-$$ \hat{y}^{(i)} \approx y^{(i)}
+$$
+\hat{y}^{(i)} \approx y^{(i)}
 $$
 
 So, to fill in a little bit more detail for the equation on top, we had said that $\hat{y}$ is as defined at the top for a training example $x$ and of course for each training example, we're using these superscripts with round brackets with parentheses to index into different train examples.
@@ -518,7 +523,7 @@ Now, for this video I explained derivatives, talking about what happens if we nu
 
 But for the purposes of our intuitive understanding, which I'll talk about nudging $a$ to the right by this small amount 0.001. Even if it's 0.001 isn't exactly tiny, tiny infinitesimal.
 
-Now, one property of the derivative is that, no matter where you take the slope of this function, it is equal to three, whether $a$ is equal to two or $a$ is equal to five. The slope of this function is equal to three, meaning that whatever is the value of $a$, if you increase it by 0.001, the value of $f(a)$ goes up by three times as much. So, this function has a safe slope everywhere. One way to see that is that, wherever you draw this little triangle, the height divided by the width always has a ratio of three to one.
+Now, one property of the derivative is that, no matter where you take the slope of this function, it is equal to three, whether $a$ is equal to two or $a$ is equal to five. The slope of this function is equal to three, meaning that whatever is the value of $a$, if you increase it by 0.001, the value of $f(a)$ goes up by three times as much. So this function has a safe slope everywhere. One way to see that is that, wherever you draw this little triangle, the height divided by the width always has a ratio of three to one.
 
 ### Summary
 
@@ -691,6 +696,207 @@ The computation graph organizes the computation with blue arrows from left to ri
 > - [ ] Forward
 
 ## Derivatives with a Computation Graph
+
+In the last video, we worked through an example of using a computation graph to compute a function $J$. Now, let's take a cleaned up version of that computation graph and show how you can use it to figure out derivative calculations for that function $J$.
+
+![1747700974075](./img/image18.png)
+
+### Example 1: Derivative with respect to v
+
+![1747701349365](./img/image19.png)
+
+Let's say you want to compute the derivative of $J$ with respect to $v$. What does this mean? Well, this is: if we were to take this value of $v$ and change it a little bit, how would the value of $J$ change?
+
+Since $J$ is defined as $3v$ and right now $v = 11$, if we bump up $v$ by a little bit to $11.001$, then $J$, which is $3v$, so currently $33$, will get bumped up to $33.003$.
+
+So here, we've increased $v$ by $0.001$ and the net result is that $J$ goes up $3$ times as much. Therefore:
+
+$$
+\frac{dJ}{dv} = 3
+$$
+
+This is because the increase in $J$ is $3$ times the increase in $v$.
+
+This is very analogous to the example we had in the previous video, where we had $f(a) = 3a$ and derived that $\frac{df}{da} = 3$. Here we have $J = 3v$, and so $\frac{dJ}{dv} = 3$, with $J$ playing the role of $f$ and $v$ playing the role of $a$.
+
+In the terminology of backpropagation, what we're seeing is that if you want to compute the derivative of this final output variable (which usually is a variable you care most about) with respect to $v$, then we've done one step of backpropagation. We call it one step backwards in this graph.
+
+### Example 2: Derivative with respect to a
+
+Now let's look at another example. What is $\frac{dJ}{da}$? In other words, if we bump up the value of $a$, how does that affect the value of $J$?
+
+Let's go through the example where $a = 5$. If we bump it up to $5.001$, the net impact is that:
+
+1. $v$ (which was $a + u$, so previously $11$) gets increased to $11.001$
+2. $J$ gets bumped up to $33.003$ (as we saw above)
+
+So what we're seeing is that if you increase $a$ by $0.001$, $J$ increases by $0.003$. By "increase $a$", we mean taking the value of $5$ and plugging in a new value. The change to $a$ propagates to the right of the computation graph so that $J$ ends up being $33.003$.
+
+The increase to $J$ is $3$ times the increase to $a$, so:
+
+$$
+\frac{dJ}{da} = 3
+$$
+
+### The Chain Rule
+
+One way to break this down is to say that if you change $a$, then that will change $v$, and through changing $v$, that would change $J$. The net change to the value of $J$ when you nudge the value of $a$ up a little bit is:
+
+1. First, by changing $a$, you end up increasing $v$ by an amount determined by $\frac{dv}{da}$
+2. Then the change in $v$ will cause the value of $J$ to also increase
+
+In calculus, this is called the **chain rule**: if $a$ affects $v$, affects $J$, then the amount that $J$ changes when you nudge $a$ is the product of:
+
+- How much $v$ changes when you nudge $a$ ($\frac{dv}{da}$)
+- How much $J$ changes when you nudge $v$ ($\frac{dJ}{dv}$)
+
+From our calculations:
+
+- $\frac{dJ}{dv} = 3$
+- $\frac{dv}{da} = 1$ (when you increase $a$ by $0.001$, $v$ changes by the same amount)
+
+Therefore:
+
+$$
+\frac{dJ}{da} = \frac{dJ}{dv} \times \frac{dv}{da} = 3 \times 1 = 3
+$$
+
+### More calculations
+
+![1747702617837](img/image20.png)
+
+This illustration demonstrates how having computed $\frac{dJ}{dv}$ (the derivative with respect to variable $v$) helps us compute $\frac{dJ}{da}$. This represents another step in our backward calculation.
+
+Let me introduce a new notational convention. When implementing backpropagation in code, there is typically a final output variable that you care about or want to optimize. In this case, that final output variable is $J$, which is the last node in our computation graph.
+
+Many computations will involve calculating the derivative of this final output variable with respect to other variables. Instead of using long variable names like $\frac{d\text{FinalOutputVar}}{d\text{var}}$ or $\frac{dJ}{d\text{var}}$ in your code, we'll use a simpler notation.
+
+Since we're always taking derivatives with respect to the final output variable ($J$ in this case), we'll use the variable name `dvar` to represent this quantity in our code. So `dvar` will represent the derivative of the final output variable ($J$) with respect to various intermediate quantities being computed.
+
+For example:
+
+- In your code, `dv` would represent $\frac{dJ}{dv}$, which we calculated to be 3
+- Similarly, `da` would represent $\frac{dJ}{da}$, which we also found to be 3
+
+We've now completed part of the backpropagation through this computation graph. Let's continue with the rest of this example in the next section.
+
+### Last calculations
+
+Let's look at a cleaned up version of the computation graph:
+
+![1747703533947](img/image21.png)
+
+![1747703596466](img/image22.png)
+
+#### Recap of Previous Calculations
+
+To recap what we've done so far:
+
+- We went backwards and found that `dv = 3` (where `dv` is the code variable name for $\frac{dJ}{dv}$)
+- We also found that `da = 3` (where `da` is the code variable name for $\frac{dJ}{da}$)
+
+We've already computed these derivatives along two edges of the graph. Now let's continue computing more derivatives.
+
+#### Computing $\frac{dJ}{du}$
+
+Let's examine the value of $u$. What is $\frac{dJ}{du}$? Through a similar calculation as before:
+
+- Starting with $u = 6$
+- If we increase $u$ to $6.001$, then $v$ (previously $11$) increases to $11.001$
+- This causes $J$ to increase from $33$ to $33.003$
+
+The increase in $J$ is three times the increase in $u$, so $\frac{dJ}{du} = 3$. This analysis for $u$ is similar to what we did for $a$. We can compute this as:
+
+$$
+\frac{dJ}{du} = \frac{dJ}{dv} \times \frac{dv}{du}
+$$
+
+We already know that $\frac{dJ}{dv} = 3$, and $\frac{dv}{du} = 1$. Therefore, `du = 3` (where `du` is the code variable name for $\frac{dJ}{du}$).
+
+#### Computing $\frac{dJ}{db}$
+
+Let's now compute $\frac{dJ}{db}$ in detail. Using the chain rule:
+
+$$
+\frac{dJ}{db} = \frac{dJ}{du} \times \frac{du}{db}
+$$
+
+We already know that $\frac{dJ}{du} = 3$. Now let's find $\frac{du}{db}$:
+
+- Since $u = b \times c$ and $c = 2$ in our example
+- If we change $b$ from $3$ to $3.001$
+- $u$ changes from $6$ to $6.002$ (because $u = 3.001 \times 2$)
+- This tells us that $\frac{du}{db} = 2$ (when $b$ increases by $0.001$, $u$ increases twice as much)
+
+Therefore:
+
+$$
+\frac{dJ}{db} = \frac{dJ}{du} \times \frac{du}{db} = 3 \times 2 = 6
+$$
+
+To verify this:
+
+- When $b = 3.001$, $u = 6.002$
+- Then $v = a + u = 5 + 6.002 = 11.002$
+- Finally, $J = 3v = 33.006$
+
+This confirms that $\frac{dJ}{db} = 6$. In our code, we would represent this as `db = 6`.
+
+#### Computing $\frac{dJ}{dc}$
+
+Let's now compute $\frac{dJ}{dc}$ in detail. Using the chain rule:
+
+$$
+\frac{dJ}{dc} = \frac{dJ}{du} \times \frac{du}{dc}
+$$
+
+We already know that $\frac{dJ}{du} = 3$. Now let's find $\frac{du}{dc}$:
+
+- Since $u = b \times c$ and $b = 3$ in our example
+- If we change $c$ from $2$ to $2.001$
+- $u$ changes from $6$ to $6.003$ (because $u = 3 \times 2.001$)
+- This tells us that $\frac{du}{dc} = 3$ (when $c$ increases by $0.001$, $u$ increases three times as much)
+
+Therefore:
+
+$$
+\frac{dJ}{dc} = \frac{dJ}{du} \times \frac{du}{dc} = 3 \times 3 = 9
+$$
+
+To verify this:
+
+- When $c = 2.001$, $u = 6.003$
+- Then $v = a + u = 5 + 6.003 = 11.003$
+- Finally, $J = 3v = 33.009$
+
+This confirms that $\frac{dJ}{dc} = 9$. In our code, we would represent this as `dc = 9`.
+
+#### Summary of the Computation Process
+
+The key takeaway from this example is that when computing derivatives, the most efficient approach is to compute them from right to left, following the direction of the red arrows in the graph. Specifically:
+
+1. First compute $\frac{dJ}{dv}$
+2. Use that to compute $\frac{dJ}{da}$ and $\frac{dJ}{du}$
+3. Use $\frac{dJ}{du}$ to compute $\frac{dJ}{db}$ and $\frac{dJ}{dc}$
+
+This demonstrates how the computation graph enables:
+
+- A forward (left-to-right) calculation to compute the cost function $J$
+- A backward (right-to-left) calculation to compute derivatives
+
+If you're not familiar with calculus or the chain rule, don't worry if some of these details went by quickly. In the next video, we'll revisit these concepts in the context of logistic regression and show you exactly how to implement the necessary computations for the derivatives of the logistic regression model.
+
+### Quick Quiz
+
+> **Question:** In this class, what does the coding convention `dvar` represent?
+>
+> **Options:**
+>
+> - [X] The derivative of a final output variable with respect to various intermediate quantities
+> - [ ] The derivative of input variables with respect to various intermediate quantities
+> - [ ] The derivative of any variable used in the code
+>
+> **Explanation:** The convention `dvar` is used to represent the derivative of the final output variable (like $J$ in our example) with respect to various intermediate quantities in the computation graph. This is a simplified notation that makes the code more readable while maintaining the mathematical meaning of the derivatives.
 
 ## Logistic Regression Gradient Descent
 
