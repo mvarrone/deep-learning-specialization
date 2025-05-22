@@ -900,6 +900,164 @@ If you're not familiar with calculus or the chain rule, don't worry if some of t
 
 ## Logistic Regression Gradient Descent
 
+### Recap and Introduction
+
+![1747880428233](img/image23.png)
+
+Welcome back. In this video, we'll discuss how to compute derivatives to implement gradient descent for logistic regression. We'll focus on the key equations needed to implement gradient descent for logistic regression.
+
+While using the computation graph might seem like overkill for deriving gradient descent for logistic regression, we'll use this approach to help you become familiar with these concepts. This will make it easier to understand when we discuss full-fledged neural networks later.
+
+### Logistic Regression Setup
+
+For logistic regression, we have:
+
+- Predictions: $\hat{y} = a = \sigma(z)$
+- Where $z = w^Tx + b$
+
+For a single example, the loss function is:
+
+$$
+L(\hat{y}, y) = -[y \log(\hat{y}) + (1-y)\log(1-\hat{y})]
+$$
+
+### Computation Graph
+
+Let's represent this as a computation graph. For this example, we'll use two features ($x_1$ and $x_2$):
+
+1. Inputs:
+
+   - Features: $x_1$, $x_2$
+   - Parameters: $w_1$, $w_2$, $b$
+2. Computation steps:
+
+   - $z = w_1x_1 + w_2x_2 + b$
+   - $\hat{y} = \sigma(z)$
+   - $L(\hat{y}, y)$
+
+In Logistic Regression, what we want to do is to modify the parameters `w` and `b` in order to reduce this loss
+
+We have described the forward propagation steps of how the loss can be computed on a single training example and now we are going to talk about how we can go backwards to compute the derivatives
+
+### Calculating Derivatives
+
+![1747880520792](img/image24.png)
+
+#### Step 1: Derivative with respect to a = $\hat{y}$
+
+First, we compute the derivative of the loss with respect to $\hat{y}$ (denoted as $da$ in code):
+
+$$
+da = \frac{dL}{d\hat{y}} = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}
+$$
+
+#### Step 2: Derivative with respect to z
+
+Next, we compute the derivative with respect to $z$ (denoted as $dz$ in code):
+
+$$
+dz = \frac{dL}{dz} = \hat{y} - y
+$$
+
+This result comes from applying the chain rule:
+
+$$
+dz = \frac{dL}{dz} = \frac{dL}{d\hat{y}} \cdot \frac{d\hat{y}}{dz}
+$$
+
+Where:
+
+- $\frac{dL}{d\hat{y}} = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}$ (from Step 1)
+- $\frac{d\hat{y}}{dz} = \hat{y}(1-\hat{y})$ (derivative of sigmoid function)
+
+When we multiply these terms together, they simplify to:
+
+$$
+dz = \frac{dL}{dz} = \hat{y} - y
+$$
+
+#### Step 3: Derivatives with respect to parameters
+
+Finally, we compute the derivatives with respect to the parameters:
+
+$$
+dw_1 = \frac{dL}{dw_1} = x_1 \cdot dz
+$$
+
+$$
+dw_2 = \frac{dL}{dw_2} = x_2 \cdot dz
+$$
+
+$$
+db =\frac{dL}{db} = dz
+$$
+
+### Gradient Descent Update
+
+For a single example, the gradient descent updates are:
+
+$$
+w_1 := w_1 - \alpha \cdot dw_1
+$$
+
+$$
+w_2 := w_2 - \alpha \cdot dw_2
+$$
+
+$$
+b := b - \alpha \cdot db
+$$
+
+Where $\alpha$ is the learning rate.
+
+### Summary
+
+We've seen how to compute derivatives and implement gradient descent for logistic regression with respect to a single training example.
+
+In the next video, we'll extend these ideas to work with an entire training set of $m$ examples.
+
+---
+
+> **Quick Quiz**
+>
+> **Question:**
+>
+> What is the simplified formula for the derivative of the loss with respect to $z$ in logistic regression?
+>
+> **Options:**
+>
+> - [ ] $a(1-y)$
+> - [X] $a - y$ (CORRECT)
+> - [ ] $\dfrac{a}{1-a}$
+>
+> **Explanation:**
+>
+> The derivative of the loss with respect to $z$ simplifies to $a - y$ after applying the chain rule:
+>
+> $$
+> \frac{dL}{dz} = \frac{dL}{d\hat{y}} \cdot \frac{d\hat{y}}{dz}
+> $$
+>
+> Where:
+>
+> $$
+> \frac{dL}{d\hat{y}} = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}
+> $$
+>
+> $$
+> \frac{d\hat{y}}{dz} = \hat{y}(1-\hat{y})
+> $$
+>
+> Multiplying these gives:
+>
+> $$
+> \left(-\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}}\right) \cdot \hat{y}(1-\hat{y}) = \hat{y} - y
+> $$
+>
+> Thus, the answer is $a - y$.
+
+---
+
 ## Gradient Descent on $m$ Examples
 
 ## Derivation of DL/dz (Optional)
